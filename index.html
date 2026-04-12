@@ -13,7 +13,12 @@
 <link rel="icon" type="image/png" href="images/drip-mark.png" />
 <link rel="apple-touch-icon" href="images/drip-mark.png" />
 <script>
-  if (!navigator.webdriver && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // Progressive enhancement: only enable reveal animations for real interactive browsers.
+  // Headless Chrome, screenshot tools, web crawlers, automated browsers, and accessibility-
+  // respecting users see content immediately.
+  if (!navigator.webdriver
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      && !/HeadlessChrome|PhantomJS|Bot|crawler|spider/i.test(navigator.userAgent)) {
     document.documentElement.classList.add('js');
   }
 </script>
