@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0A0A0A;
+    color: #F5F0E8;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+  }
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('brand-hero.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.52) contrast(1.15) saturate(1.18);
+  }
+  .bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.60) 40%, rgba(10,10,10,0.10) 85%, rgba(10,10,10,0) 100%),
+      linear-gradient(180deg, rgba(10,10,10,0.30) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 70%, rgba(10,10,10,0.40) 100%);
+  }
+  .letterbox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: #000;
+    z-index: 3;
+  }
+  .letterbox.top { top: 0; border-bottom: 1px solid rgba(196,162,101,0.5); }
+  .letterbox.bot { bottom: 0; border-top: 1px solid rgba(196,162,101,0.5); }
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 880px;
+  }
+  .brand-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .brand-row .wordmark {
+    font-family: 'Stint Ultra Expanded', serif;
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    color: #C4A265;
+    line-height: 1;
+  }
+  .brand-row .austin {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(196,162,101,0.55);
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #C4A265;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: #C4A265;
+  }
+  h1 {
+    font-family: 'Stint Ultra Expanded', serif;
+    font-size: 180px;
+    line-height: 0.85;
+    letter-spacing: 0.04em;
+    color: #C4A265;
+    margin-bottom: 14px;
+    text-shadow: 0 6px 48px rgba(0,0,0,0.6);
+  }
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 34px;
+    color: rgba(245,240,232,0.92);
+    letter-spacing: 0.01em;
+    margin-top: 4px;
+  }
+  .tagline .dot { color: #C4A265; margin: 0 8px; font-style: normal; }
+  .url {
+    position: absolute;
+    bottom: 56px;
+    left: 80px;
+    z-index: 2;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+  }
+  .url strong { color: #C4A265; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="letterbox top"></div>
+  <div class="letterbox bot"></div>
+  <div class="content">
+    <div class="brand-row">
+      <span class="wordmark">DRIP</span>
+      <span class="austin">Austin</span>
+    </div>
+    <div class="eyebrow">Made in Austin, Texas</div>
+    <h1>DRIP</h1>
+    <div class="tagline">Drip.<span class="dot">·</span>Drizzle.<span class="dot">·</span>Dip.</div>
+  </div>
+  <div class="url">Eight premium pizza dipping sauces · <strong>No seed oils</strong> · A Woolf Ventures brand</div>
+</body>
+</html>
