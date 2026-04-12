@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Drip Austin — Drip. Drizzle. Dip.</title>
+<meta name="description" content="Premium pizza dipping sauces from Austin, Texas. EVOO and ghee base, no seed oils. Eight sauces. One lineup. Drip. Drizzle. Dip." />
+<meta property="og:title" content="Drip Austin — Drip. Drizzle. Dip." />
+<meta property="og:description" content="Eight premium pizza dipping sauces. EVOO and ghee base, no seed oils. Made in Austin." />
+<meta property="og:image" content="images/brand-hero.jpeg" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="images/drip-mark.png" />
+<link rel="apple-touch-icon" href="images/drip-mark.png" />
+<script>
+  if (!navigator.webdriver && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js');
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --bg-warm: #14100B;
+    --fg: #F5F0E8;
+    --muted: rgba(245,240,232,0.65);
+    --line: rgba(196,162,101,0.18);
+    --line-strong: rgba(196,162,101,0.4);
+    --accent: #C4A265;
+    --accent-light: #D4B872;
+    --accent-dark: #B8944F;
+    --them: rgba(180,40,40,0.7);
+    --card: rgba(245,240,232,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Sitewide film grain (sister to Woolf Ventures) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grainShift 0.6s steps(4) infinite;
+  }
+  @keyframes grainShift {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-2%, 1%); }
+    50%  { transform: translate(1%, -2%); }
+    75%  { transform: translate(-1%, 2%); }
+    100% { transform: translate(2%, -1%); }
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    z-index: 100;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .brand .wordmark {
+    font-family: 'Stint Ultra Expanded', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .brand .austin {
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(196,162,101,0.5);
+  }
+  .nav-cta {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    color: var(--accent);
+    transition: all 0.3s ease;
+  }
+  .nav-cta:hover {
+    border-color: var(--accent);
+    background: rgba(196,162,101,0.08);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 80px 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: -5%;
+    background-image: url('images/brand-hero.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.55) contrast(1.15) saturate(1.18);
+    z-index: 0;
+    animation: kenburns 32s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes kenburns {
+    0%   { transform: scale(1.0) translate(0, 0); }
+    100% { transform: scale(1.10) translate(-1%, 0.8%); }
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(10,10,10,0.40) 0%,
+        rgba(10,10,10,0.20) 30%,
+        rgba(10,10,10,0.55) 75%,
+        rgba(10,10,10,0.92) 100%),
+      radial-gradient(ellipse at 30% 60%, rgba(10,10,10,0.55), rgba(10,10,10,0) 60%);
+  }
+  /* Letterbox */
+  .letterbox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 38px;
+    background: #000;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .letterbox.top { top: 72px; border-bottom: 1px solid rgba(196,162,101,0.5); }
+  .letterbox.bot { bottom: 0; border-top: 1px solid rgba(196,162,101,0.5); }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 920px;
+  }
+  .hero-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1.hero-title {
+    font-family: 'Stint Ultra Expanded', serif;
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 0.85;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 24px;
+    text-shadow: 0 8px 60px rgba(0,0,0,0.6);
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: rgba(245,240,232,0.92);
+    margin-bottom: 36px;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .hero-tagline .dot {
+    display: inline-block;
+    color: var(--accent);
+    margin: 0 10px;
+    font-style: normal;
+  }
+  .hero-blurb {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 44px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 34px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-light), var(--accent), var(--accent-dark));
+    color: #0A0A0A;
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(196,162,101,0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 50px rgba(196,162,101,0.4), 0 0 80px rgba(196,162,101,0.2);
+  }
+  .btn-ghost {
+    background: rgba(245,240,232,0.04);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    color: var(--fg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    background: rgba(196,162,101,0.08);
+    transform: translateY(-2px);
+  }
+  .btn .arrow { display: inline-block; transition: transform 0.3s ease; }
+  .btn:hover .arrow { transform: translateX(6px); }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+  }
+  .scroll-cue::before {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), rgba(245,240,232,0));
+    animation: scrollLine 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleX(0.4); transform-origin: left; opacity: 0.4; }
+    50%      { transform: scaleX(1);   transform-origin: left; opacity: 1; }
+  }
+
+  /* ---------- SECTION DEFAULTS ---------- */
+  section {
+    position: relative;
+    padding: 140px 80px;
+    border-top: 1px solid var(--line);
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .section-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    margin-top: 14px;
+  }
+  .section-blurb {
+    max-width: 460px;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .chapter {
+    position: absolute;
+    top: 96px;
+    right: 80px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .chapter::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  /* ---------- LINEUP (8 SKUs) ---------- */
+  section.lineup {
+    background:
+      radial-gradient(ellipse at 80% 30%, rgba(196,162,101,0.05), rgba(10,10,10,0) 60%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .lineup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .sku-card {
+    background: var(--bg);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.4s ease;
+    overflow: hidden;
+  }
+  .sku-card:hover {
+    background:
+      radial-gradient(ellipse at top, rgba(196,162,101,0.10) 0%, rgba(245,240,232,0) 60%),
+      rgba(245,240,232,0.03);
+  }
+  .sku-image {
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s ease;
+  }
+  .sku-card:hover .sku-image { transform: scale(1.04); }
+  .sku-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0) 50%, rgba(10,10,10,0.6) 100%);
+  }
+  .sku-body {
+    padding: 24px 24px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .sku-num {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--accent);
+  }
+  .sku-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    line-height: 1.05;
+    margin-bottom: 2px;
+  }
+  .sku-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .sku-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+  .sku-pill {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent), var(--accent-dark));
+    padding: 4px 9px;
+    border-radius: 3px;
+  }
+
+  /* ---------- STORY ---------- */
+  section.story {
+    background:
+      radial-gradient(ellipse at 25% 50%, rgba(196,162,101,0.06), rgba(10,10,10,0) 60%),
+      var(--bg);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 56px;
+  }
+  .story-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--fg);
+    margin-bottom: 28px;
+  }
+  .story-text p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 18px;
+    max-width: 520px;
+  }
+  .story-text p strong {
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .compare-card {
+    background: var(--bg);
+    padding: 32px 28px;
+  }
+  .compare-card.them {
+    background: rgba(180,40,40,0.05);
+  }
+  .compare-card.us {
+    background: rgba(196,162,101,0.04);
+  }
+  .compare-label {
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .compare-card.them .compare-label { color: rgba(220,80,80,0.9); }
+  .compare-card.us .compare-label { color: var(--accent); }
+  .compare-list { list-style: none; padding: 0; }
+  .compare-list li {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    padding: 6px 0 6px 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .compare-card.them .compare-list li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: rgba(220,80,80,0.7);
+    font-weight: 700;
+  }
+  .compare-card.us .compare-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---------- DROP / CTA ---------- */
+  section.drop {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(196,162,101,0.08), rgba(10,10,10,0) 65%),
+      var(--bg);
+    text-align: center;
+    padding: 160px 80px;
+  }
+  .drop h2 {
+    font-family: 'Stint Ultra Expanded', serif;
+    font-style: normal;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    color: var(--accent);
+    line-height: 0.9;
+    letter-spacing: 0.03em;
+    margin-bottom: 28px;
+  }
+  .drop .drop-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+  }
+  .drop .stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin: 56px auto;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Alfa Slab One', serif;
+    font-size: 3.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 60px 80px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    background: var(--bg);
+  }
+  footer .brand .wordmark { font-size: 1.125rem; }
+  .footer-meta {
+    font-size: 0.625rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+  .footer-meta a { color: var(--accent); }
+
+  /* ---------- REVEAL ---------- */
+  .reveal { opacity: 1; transform: none; transition: opacity 0.9s ease, transform 0.9s ease; }
+  html.js .reveal { opacity: 0; transform: translateY(28px); }
+  html.js .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1100px) {
+    .lineup-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    nav, .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-top: 120px; padding-bottom: 60px; min-height: auto; }
+    h1.hero-title { font-size: clamp(3.5rem, 18vw, 6rem); }
+    .scroll-cue { left: 24px; bottom: 40px; }
+    .chapter { right: 24px; top: 88px; font-size: 0.75rem; }
+    .chapter::before { width: 20px; }
+    .story-grid { grid-template-columns: 1fr; gap: 48px; }
+    .compare { grid-template-columns: 1fr; }
+    .drop .stats { gap: 40px; }
+    .stat-num { font-size: 2.75rem; }
+    .letterbox { height: 24px; }
+  }
+  @media (max-width: 600px) {
+    .lineup-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="brand">
+    <span class="wordmark">DRIP</span>
+    <span class="austin">Austin</span>
+  </a>
+  <a href="#lineup" class="nav-cta">See The Lineup</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="letterbox top"></div>
+  <div class="letterbox bot"></div>
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Made in Austin · Texas</div>
+    <h1 class="hero-title">DRIP</h1>
+    <div class="hero-tagline">
+      Drip.<span class="dot">·</span>Drizzle.<span class="dot">·</span>Dip.
+    </div>
+    <p class="hero-blurb">
+      Eight premium pizza dipping sauces, made small-batch in Austin. EVOO and ghee base. No seed oils.
+      No corn syrup. No shortcuts. Just the sauces your pizza always wished it had.
+    </p>
+    <div class="cta-row">
+      <a href="#lineup" class="btn btn-primary">See The Lineup <span class="arrow">→</span></a>
+      <a href="#story" class="btn btn-ghost">The Story <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<!-- ============ LINEUP ============ -->
+<section class="lineup" id="lineup">
+  <div class="chapter">II. &nbsp; The Lineup</div>
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">Eight Sauces · One Lineup</div>
+      <h2>Find Your Drip.</h2>
+    </div>
+    <p class="section-blurb">
+      Every sauce is built on extra-virgin olive oil and grass-fed ghee — never seed oils, never shortcuts.
+      Eight flavors that range from a Sunday garlic butter to a Bangkok backstreet kick.
+    </p>
+  </div>
+  <div class="lineup-grid reveal">
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/atx-original-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 01</div>
+        <div class="sku-name">ATX Original</div>
+        <div class="sku-tagline">The signature. Garlic, olive oil, parmesan, a whisper of chili.</div>
+        <div class="sku-pills"><span class="sku-pill">Flagship</span><span class="sku-pill">Mild</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/classic-garlic-butter-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 02</div>
+        <div class="sku-name">Classic Garlic Butter</div>
+        <div class="sku-tagline">Grass-fed ghee, roasted garlic, fresh herbs. The Sunday sauce.</div>
+        <div class="sku-pills"><span class="sku-pill">Crowd Favorite</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/hot-honey-garlic-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 03</div>
+        <div class="sku-name">Hot Honey Garlic</div>
+        <div class="sku-tagline">Wildflower honey, Calabrian heat, garlic confit. Sweet hits the heat.</div>
+        <div class="sku-pills"><span class="sku-pill">Sweet</span><span class="sku-pill">Heat</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/spicy-calabrian-chili-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 04</div>
+        <div class="sku-name">Spicy Calabrian Chili</div>
+        <div class="sku-tagline">Crushed Calabrian chilis, EVOO, garlic, sea salt. Old-country heat.</div>
+        <div class="sku-pills"><span class="sku-pill">Italian</span><span class="sku-pill">Hot</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/truffle-herb-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 05</div>
+        <div class="sku-name">Truffle Herb</div>
+        <div class="sku-tagline">Real black truffle, fresh thyme, sea salt. Special-occasion energy.</div>
+        <div class="sku-pills"><span class="sku-pill">Premium</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/korean-gochujang-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 06</div>
+        <div class="sku-name">Korean Gochujang</div>
+        <div class="sku-tagline">Fermented gochujang, sesame, ginger, lime. Slow-burn umami.</div>
+        <div class="sku-pills"><span class="sku-pill">Umami</span><span class="sku-pill">Heat</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/bangkok-boom-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 07</div>
+        <div class="sku-name">Bangkok Boom</div>
+        <div class="sku-tagline">Thai basil, lemongrass, bird's-eye chili, lime. Street-cart fireworks.</div>
+        <div class="sku-pills"><span class="sku-pill">Wild</span><span class="sku-pill">Hot</span></div>
+      </div>
+    </div>
+
+    <div class="sku-card">
+      <div class="sku-image" style="background-image: url('images/heroes/lillys-chili-hero.jpeg');"></div>
+      <div class="sku-body">
+        <div class="sku-num">No. 08</div>
+        <div class="sku-name">Lilly's Chilis</div>
+        <div class="sku-tagline">Hill country chilis, smoked paprika, brown butter. A love letter to Texas.</div>
+        <div class="sku-pills"><span class="sku-pill">Texas</span><span class="sku-pill">Smoky</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="story">
+  <div class="chapter">III. &nbsp; The Story</div>
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">Why We Built This</div>
+      <h2>Pizza Deserves<br/>Better.</h2>
+    </div>
+    <p class="section-blurb">
+      Drip Austin started with a simple question: why does the best pizza in the world get served with
+      the worst dipping sauce on earth? Industrial garlic spread, seed-oil ranch, sugar-loaded marinara.
+      We thought pizza deserved better. So we built better.
+    </p>
+  </div>
+  <div class="story-grid reveal">
+    <div class="story-text">
+      <h3>From the test kitchen.</h3>
+      <p>
+        Every Drip sauce is built on <strong>extra-virgin olive oil</strong> and <strong>grass-fed ghee</strong> —
+        never canola, never soybean, never sunflower. Real garlic, fresh herbs, single-origin chilis. The kind
+        of ingredients you'd reach for if you were cooking for someone you love.
+      </p>
+      <p>
+        Made small-batch in Austin. Bottled by hand. Eight flavors built to range from <em>"my kid will eat it"</em>
+        to <em>"my Thai friend says it's authentic."</em> No corn syrup. No "natural flavors." No shortcuts.
+      </p>
+      <p>
+        We're a Woolf Ventures brand — small team, big standards, late nights in the kitchen.
+      </p>
+    </div>
+    <div class="compare">
+      <div class="compare-card them">
+        <div class="compare-label">Them</div>
+        <ul class="compare-list">
+          <li>Soybean &amp; canola oil base</li>
+          <li>"Natural flavors" (chemicals)</li>
+          <li>Corn syrup &amp; preservatives</li>
+          <li>Made in a factory in Ohio</li>
+          <li>One flavor, one note, forever</li>
+        </ul>
+      </div>
+      <div class="compare-card us">
+        <div class="compare-label">Drip</div>
+        <ul class="compare-list">
+          <li>EVOO &amp; grass-fed ghee base</li>
+          <li>Real ingredients, named on label</li>
+          <li>Zero seed oils, zero corn syrup</li>
+          <li>Made small-batch in Austin</li>
+          <li>Eight flavors, every craving covered</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE DROP ============ -->
+<section class="drop" id="drop">
+  <div class="chapter">IV. &nbsp; The Drop</div>
+  <div class="section-head reveal" style="justify-content: center; text-align: center;">
+    <div>
+      <div class="section-label" style="display: block; text-align: center;">Coming To Austin First</div>
+    </div>
+  </div>
+  <h2>DRIP. DRIZZLE. DIP.</h2>
+  <p class="drop-tagline">
+    Launching in Austin first — local pizza shops, curated retailers, and a small wave of
+    home boxes for early supporters. Want one of the first jars? Drop your email below.
+  </p>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Sauces</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Seed Oils</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">City First</div>
+    </div>
+  </div>
+  <div class="cta-row" style="justify-content: center;">
+    <a href="mailto:drip@woolfventures.co?subject=Drip%20Austin%20-%20Early%20Access" class="btn btn-primary">Get Early Access <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="brand">
+    <span class="wordmark">DRIP</span>
+    <span class="austin">Austin</span>
+  </a>
+  <div class="footer-meta">
+    A <a href="https://nwoolf85-hub.github.io/woolf-ventures/">Woolf Ventures</a> brand · Austin, Texas · © 2026
+  </div>
+</footer>
+
+<script>
+  if (document.documentElement.classList.contains('js')) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 200px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    requestAnimationFrame(() => document.querySelector('.hero-content')?.classList.add('in'));
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+    }, 2000);
+  }
+</script>
+</body>
+</html>
