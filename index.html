@@ -381,6 +381,12 @@
     max-width: 560px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.15);
     margin-bottom: 16px;
+    transition: all 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    overflow: hidden;
+  }
+  .showcase img:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,163,91,0.25), 0 0 60px rgba(201,163,91,0.1);
   }
   .showcase-caption {
     font-family: 'Playfair Display', Georgia, serif;
@@ -426,6 +432,12 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--accent);
+    animation: chefBreath 6s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(201,163,91,0.1);
+  }
+  @keyframes chefBreath {
+    0%   { transform: scale(1.0); box-shadow: 0 0 20px rgba(201,163,91,0.1); }
+    100% { transform: scale(1.06); box-shadow: 0 0 40px rgba(201,163,91,0.2); }
   }
   .chef-name {
     font-family: 'Playfair Display', Georgia, serif;
