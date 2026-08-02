@@ -16,10 +16,22 @@
   :root {
     --bg: #09090B;
     --fg: #F5F0E8;
+    --fg-soft: rgba(245,240,232,0.7);
     --muted: rgba(245,240,232,0.55);
     --accent: #c9a35b;
     --line: rgba(201,163,91,0.15);
+    --nav-bg: rgba(9,9,11,0.92);
+    --hero-bright: 0.38;
   }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #F4EFE4; --fg: #241f16; --fg-soft: rgba(36,31,22,0.8);
+      --muted: rgba(44,37,24,0.62); --accent: #9d7c33; --line: rgba(157,124,51,0.24);
+      --nav-bg: rgba(246,241,232,0.86); --hero-bright: 0.46;
+    }
+  }
+  :root[data-theme="dark"] { --bg:#09090B; --fg:#F5F0E8; --fg-soft:rgba(245,240,232,0.7); --muted:rgba(245,240,232,0.55); --accent:#c9a35b; --line:rgba(201,163,91,0.15); --nav-bg:rgba(9,9,11,0.92); --hero-bright:0.38; }
+  :root[data-theme="light"] { --bg:#F4EFE4; --fg:#241f16; --fg-soft:rgba(36,31,22,0.8); --muted:rgba(44,37,24,0.62); --accent:#9d7c33; --line:rgba(157,124,51,0.24); --nav-bg:rgba(246,241,232,0.86); --hero-bright:0.46; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -28,6 +40,7 @@
     color: var(--fg);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease;
   }
   a { color: inherit; text-decoration: none; }
 
@@ -85,11 +98,22 @@
     justify-content: space-between;
     padding: 0 32px;
     z-index: 100;
-    background: rgba(9,9,11,0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
+    transition: background 0.5s ease;
   }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); background: transparent;
+    padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .nav-brand {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
@@ -126,7 +150,7 @@
     position: absolute;
     inset: -4%;
     background: url('images/drip-cooler-hero.jpg') center/cover no-repeat;
-    filter: brightness(0.38) saturate(1.15) contrast(1.05);
+    filter: brightness(var(--hero-bright)) saturate(1.15) contrast(1.05);
     animation: heroDrift 10s ease-in-out infinite alternate;
     transform-origin: center center;
   }
@@ -396,7 +420,7 @@
     font-family: 'Playfair Display', Georgia, serif;
     font-style: italic;
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.4);
+    color: var(--muted);
   }
 
   /* CHEF PROFILE */
@@ -478,7 +502,7 @@
     margin-bottom: 8px;
     padding-left: 20px;
     position: relative;
-    color: rgba(255,255,255,0.7);
+    color: var(--fg-soft);
   }
   .chef-creds li::before {
     content: '';
@@ -489,7 +513,7 @@
     height: 2px;
     background: var(--accent);
   }
-  .chef-creds li strong { color: #fff; font-weight: 600; }
+  .chef-creds li strong { color: var(--fg); font-weight: 600; }
   .chef-quote {
     font-family: 'Playfair Display', Georgia, serif;
     font-style: italic;
@@ -534,7 +558,7 @@
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    color: var(--muted);
   }
 
   /* RESPONSIVE */
@@ -558,7 +582,10 @@
 
 <nav>
   <div class="nav-brand">DRIP</div>
-  <a href="#lineup" class="nav-link">The Sauces</a>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme"><span id="themeIcon">☾</span><span id="themeLabel">Dark</span></button>
+    <a href="#lineup" class="nav-link">The Sauces</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -574,6 +601,23 @@
     <a href="#lineup" class="hero-cta">See The Sauces →</a>
   </div>
 </div>
+
+<!-- SMARTER INDULGENCE -->
+<section id="smarter" style="text-align:center;">
+  <div class="section-label" style="margin-bottom:12px;">The Smarter Indulgence</div>
+  <h2 class="gold-shimmer" style="margin:0 auto 18px;">Eat the whole pizza.<br>Wake up smug.</h2>
+  <p class="section-blurb" style="margin:0 auto 30px; max-width:660px;">
+    Still the treat &mdash; minus the wreckage. Frozen yogurt instead of the tub of ice cream. Hard seltzer
+    instead of the sugar-bomb cocktail. The full pleasure, none of the morning-after tax. Every mass-market dip
+    is built on soybean and canola oil; we build ours on <strong style="color:var(--fg);">olive oil and ghee</strong>,
+    so you can go back for the last slice with total peace of mind.
+  </p>
+  <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">ice cream</span> &rarr; <strong style="color:var(--accent);">frozen yogurt</strong></span>
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">sugar cocktail</span> &rarr; <strong style="color:var(--accent);">hard seltzer</strong></span>
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">seed-oil dip</span> &rarr; <strong style="color:var(--accent);">Drip</strong></span>
+  </div>
+</section>
 
 <!-- LINEUP -->
 <section id="lineup">
@@ -675,6 +719,19 @@
     <span>A Woolf Ventures Brand</span>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var root = document.documentElement,
+        btn = document.getElementById('themeToggle'),
+        ico = document.getElementById('themeIcon'),
+        lbl = document.getElementById('themeLabel');
+    function sysDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+    function apply(mode){ root.setAttribute('data-theme', mode); var d = mode === 'dark'; ico.textContent = d ? '☾' : '☀'; lbl.textContent = d ? 'Dark' : 'Light'; }
+    apply(sysDark() ? 'dark' : 'light');
+    btn.addEventListener('click', function(){ apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
+  })();
+</script>
 
 </body>
 </html>
