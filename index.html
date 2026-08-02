@@ -576,6 +576,21 @@
     .nav-brand { font-size: 1.1rem; }
     .nav-link { font-size: 0.6rem; padding: 6px 12px; }
   }
+
+  /* PRODUCT LIDS (design-as-code — current Launch Four) */
+  .lid-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin: 0 auto 20px; max-width: 780px; }
+  .lid-item { display: flex; flex-direction: column; align-items: center; }
+  .lidwrap { width: 160px; height: 160px; position: relative; }
+  .lid { position: absolute; top: 0; left: 0; width: 360px; height: 360px; border-radius: 50%; overflow: hidden; transform: scale(0.444); transform-origin: top left; background: radial-gradient(circle at 50% 38%, #131210, #060605 78%); box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.08); }
+  .lid .ro { position: absolute; inset: 7px; border-radius: 50%; box-shadow: inset 0 0 0 5px var(--sku); }
+  .lid .ri { position: absolute; inset: 26px; border-radius: 50%; border: 0.5px solid rgba(201,163,91,0.16); }
+  .lid .lc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 44px 30px; }
+  .lid .ld { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 5px; color: var(--sku-l); line-height: 1; }
+  .lid .la { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 9px; text-transform: uppercase; color: rgba(201,163,91,0.42); margin: 4px 0 0 9px; }
+  .lid .lr { width: 42px; height: 1px; background: linear-gradient(90deg, transparent, var(--sku), transparent); margin: 10px 0; }
+  .lid .lf { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--sku-l); line-height: 1.1; }
+  .lid .lp { margin-top: 9px; font-size: 6.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #0A0A0A; background: linear-gradient(135deg, var(--sku-l), var(--sku)); padding: 3px 8px; border-radius: 2px; }
+  .lid-name { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; font-size: 0.95rem; color: var(--accent); margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -629,24 +644,24 @@
   </p>
   <div class="flavor-grid">
     <div class="flavor-card">
-      <div class="flavor-num">No. 01 · The Flagship</div>
-      <div class="flavor-name gold-shimmer">Garlic Butter</div>
-      <p class="flavor-desc">Rich garlic meets real ghee and olive oil. The dipping sauce pizza has been waiting for.</p>
-    </div>
-    <div class="flavor-card">
-      <div class="flavor-num">No. 02 · Sweet Heat</div>
-      <div class="flavor-name gold-shimmer">Hot Honey Garlic</div>
-      <p class="flavor-desc">Raw honey, cayenne, garlic. Sweet, spicy, and impossible to put down.</p>
-    </div>
-    <div class="flavor-card">
-      <div class="flavor-num">No. 03 · The Comfort</div>
+      <div class="flavor-num">No. 01 · The Crowd-Pleaser</div>
       <div class="flavor-name gold-shimmer">Garlic Parmesan</div>
-      <p class="flavor-desc">Real parmigiano, roasted garlic, fresh herbs. Creamy, cheesy, clean.</p>
+      <p class="flavor-desc">Roasted garlic and real parmesan, melted into every bite of crust.</p>
     </div>
     <div class="flavor-card">
-      <div class="flavor-num">No. 04 · The Crowd Pleaser</div>
+      <div class="flavor-num">No. 02 · The Volume King</div>
       <div class="flavor-name gold-shimmer">Ranch</div>
-      <p class="flavor-desc">The only ranch made without seed oils. Real buttermilk, dill, chives, lemon finish.</p>
+      <p class="flavor-desc">America's favorite dip, finally done clean — cultured buttermilk, fresh dill, zero shortcuts.</p>
+    </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 03 · The Austin Crossover</div>
+      <div class="flavor-name gold-shimmer">Jalapeño Crema</div>
+      <p class="flavor-desc">Roasted jalapeño, cilantro, and lime — born for pizza, dangerous on tacos and eggs.</p>
+    </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 04 · The Local Flag</div>
+      <div class="flavor-name gold-shimmer">Texas BBQ</div>
+      <p class="flavor-desc">Sweet, smoky, tomato-forward — Central Texas, in dip form.</p>
     </div>
   </div>
 </section>
@@ -688,8 +703,37 @@
 <!-- PRODUCT SHOWCASE -->
 <div class="showcase">
   <div class="showcase-label">The Product</div>
-  <img src="images/drip-quartet.jpg" alt="Drip Austin — four flavors">
-  <p class="showcase-caption">Four flavors. Pure olive oil and ghee. No seed oils.</p>
+  <div class="lid-row">
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#c9a35b;--sku-l:#e2c37c;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">GARLIC<br>PARMESAN</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Garlic Parmesan</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#cbc3a0;--sku-l:#ddd6b8;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">RANCH</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Ranch</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#a9b57e;--sku-l:#c1cc98;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">JALAPE&Ntilde;O<br>CREMA</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Jalape&ntilde;o Crema</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#c08a4e;--sku-l:#d6a267;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">TEXAS<br>BBQ</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Texas BBQ</div>
+    </div>
+  </div>
+  <p class="showcase-caption">Four flavors. Olive oil and ghee. No seed oils.</p>
 </div>
 
 <!-- CHEF -->
@@ -698,10 +742,10 @@
   <div class="chef-card">
     <div class="chef-initial">CV</div>
     <h3 class="chef-name gold-shimmer">Claudia Vital</h3>
-    <p class="chef-title">Chef &amp; Co-Creator &nbsp;·&nbsp; Austin, Texas</p>
+    <p class="chef-title">Chef Partner &nbsp;·&nbsp; Austin, Texas</p>
     <div class="chef-rule"></div>
     <ul class="chef-creds">
-      <li>Private caterer for <strong>Oscar-winning actors</strong>, <strong>Fortune 500 founders</strong>, and Austin's most discerning tables — including <strong>Matthew McConaughey</strong> and <strong>John Mackey</strong>, the man who built Whole Foods</li>
+      <li>Private caterer for <strong>Oscar-winning actors</strong>, <strong>Fortune 500 founders</strong>, and Austin's most discerning tables</li>
       <li>Runs her own kitchen — specializes in fresh, from-scratch sauces with real ingredients</li>
       <li>Mexican-American heritage — the flavors she grew up with are the ones nobody else is putting in a dip cup</li>
     </ul>
