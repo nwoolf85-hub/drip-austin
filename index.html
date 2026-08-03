@@ -21,17 +21,17 @@
     --accent: #c9a35b;
     --line: rgba(201,163,91,0.15);
     --nav-bg: rgba(9,9,11,0.92);
-    --hero-bright: 0.38;
+    --hero-bright: 0.64;
   }
   @media (prefers-color-scheme: light) {
     :root {
       --bg: #F4EFE4; --fg: #241f16; --fg-soft: rgba(36,31,22,0.8);
       --muted: rgba(44,37,24,0.62); --accent: #9d7c33; --line: rgba(157,124,51,0.24);
-      --nav-bg: rgba(246,241,232,0.86); --hero-bright: 0.46;
+      --nav-bg: rgba(246,241,232,0.86); --hero-bright: 0.74;
     }
   }
-  :root[data-theme="dark"] { --bg:#09090B; --fg:#F5F0E8; --fg-soft:rgba(245,240,232,0.7); --muted:rgba(245,240,232,0.55); --accent:#c9a35b; --line:rgba(201,163,91,0.15); --nav-bg:rgba(9,9,11,0.92); --hero-bright:0.38; }
-  :root[data-theme="light"] { --bg:#F4EFE4; --fg:#241f16; --fg-soft:rgba(36,31,22,0.8); --muted:rgba(44,37,24,0.62); --accent:#9d7c33; --line:rgba(157,124,51,0.24); --nav-bg:rgba(246,241,232,0.86); --hero-bright:0.46; }
+  :root[data-theme="dark"] { --bg:#09090B; --fg:#F5F0E8; --fg-soft:rgba(245,240,232,0.7); --muted:rgba(245,240,232,0.55); --accent:#c9a35b; --line:rgba(201,163,91,0.15); --nav-bg:rgba(9,9,11,0.92); --hero-bright:0.64; }
+  :root[data-theme="light"] { --bg:#F4EFE4; --fg:#241f16; --fg-soft:rgba(36,31,22,0.8); --muted:rgba(44,37,24,0.62); --accent:#9d7c33; --line:rgba(157,124,51,0.24); --nav-bg:rgba(246,241,232,0.86); --hero-bright:0.74; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -149,10 +149,25 @@
   .hero-bg {
     position: absolute;
     inset: -4%;
-    background: url('images/drip-cooler-hero.jpg') center/cover no-repeat;
-    filter: brightness(var(--hero-bright)) saturate(1.15) contrast(1.05);
-    animation: heroDrift 10s ease-in-out infinite alternate;
+    z-index: 0;
+    background: url('images/hero-dip.jpg') center/cover no-repeat;
+    filter: brightness(var(--hero-bright)) saturate(1.12) contrast(1.04);
+    animation: heroDrift 12s ease-in-out infinite alternate;
     transform-origin: center center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 44%, rgba(6,6,8,0.7) 0%, rgba(6,6,8,0.24) 40%, rgba(6,6,8,0) 66%),
+      linear-gradient(0deg, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0) 42%),
+      linear-gradient(180deg, rgba(6,6,8,0.5) 0%, rgba(6,6,8,0) 24%);
+  }
+  .hero-austin, .hero-ritual, .hero-tagline, .hero-no-seed {
+    text-shadow: 0 2px 16px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.6);
   }
   .hero-content {
     position: relative;
