@@ -754,6 +754,33 @@
   .lid .lf { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--sku-l); line-height: 1.1; }
   .lid .lp { margin-top: 9px; font-size: 6.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #0A0A0A; background: linear-gradient(135deg, var(--sku-l), var(--sku)); padding: 3px 8px; border-radius: 2px; }
   .lid-name { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; font-size: 0.95rem; color: var(--accent); margin-top: 12px; }
+  /* ===== THE STEAL — value / deal punch ===== */
+  .steal { padding: clamp(90px,12vh,140px) 24px; background: var(--bg); position: relative; }
+  .steal-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .steal-head { font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:700;
+    font-size: clamp(2.2rem,6vw,4.2rem); line-height:1.02; margin: 14px auto 0; }
+  .steal-sub { font-family:'Inter',sans-serif; color: var(--fg-soft); font-size: clamp(1rem,2vw,1.2rem);
+    max-width: 42ch; margin: 22px auto 0; line-height:1.55; }
+  .steal-reframe { display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+    gap: clamp(14px,3vw,36px); margin: clamp(46px,7vh,76px) auto; }
+  .sr-item { display:flex; flex-direction:column; align-items:center; }
+  .sr-num { font-family:'Bebas Neue',sans-serif; font-size: clamp(2.7rem,8vw,5.6rem); line-height:0.9; color: var(--fg); }
+  .sr-word { font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:700; font-size: clamp(2rem,6vw,4.2rem); color: var(--fg); }
+  .sr-hero .sr-num { color: var(--accent); }
+  .sr-lab { font-family:'Inter',sans-serif; font-size:0.7rem; letter-spacing:0.28em; text-transform:uppercase; color: var(--muted); margin-top:12px; }
+  .sr-plus, .sr-eq { font-family:'Bebas Neue',sans-serif; font-size: clamp(1.6rem,4vw,3rem); color: var(--muted); }
+  .steal-pillars { display:grid; grid-template-columns:1fr; gap: 20px; max-width: 900px; margin: 0 auto; text-align:left; }
+  @media(min-width:760px){ .steal-pillars{ grid-template-columns: repeat(3,1fr); } }
+  .pillar { padding: 26px 24px; border:1px solid var(--line); border-radius:16px; background: rgba(201,163,91,0.045);
+    transition: border-color .3s ease, transform .3s ease; }
+  .pillar:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .pillar-k { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.05em; color: var(--accent); margin-bottom:10px; }
+  .pillar p { font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.55; color: var(--fg-soft); }
+  .steal-cta { display:inline-block; margin-top: clamp(42px,6vh,62px); font-family:'Inter',sans-serif; font-size:0.78rem;
+    font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color: var(--bg);
+    background: linear-gradient(135deg,#dbb94e,#c9a35b 50%,#a8863a); border-radius:8px; padding:15px 34px;
+    box-shadow:0 8px 24px rgba(201,163,91,0.25); transition: transform .3s ease, box-shadow .3s ease; }
+  .steal-cta:hover { transform: translateY(-3px); box-shadow:0 16px 40px rgba(201,163,91,0.35); }
 </style>
 </head>
 <body>
@@ -835,6 +862,40 @@
       <div class="flavor-name gold-shimmer">Texas BBQ</div>
       <p class="flavor-desc">Central Texas style. Tomato-forward, sweet-smoky, oak-kissed. A flag in the ground.</p>
     </div>
+  </div>
+</section>
+
+<!-- THE STEAL — value / deal punch -->
+<section id="steal" class="steal">
+  <div class="steal-inner">
+    <div class="section-label">The Steal</div>
+    <h2 class="steal-head gold-shimmer">The best three dollars<br>on the table.</h2>
+    <p class="steal-sub">You spent twenty on the pizza. The part you&rsquo;ll actually remember costs three.</p>
+
+    <div class="steal-reframe">
+      <div class="sr-item"><span class="sr-num">$20</span><span class="sr-lab">the pizza</span></div>
+      <span class="sr-plus">+</span>
+      <div class="sr-item sr-hero"><span class="sr-num">$2.99</span><span class="sr-lab">the upgrade</span></div>
+      <span class="sr-eq">=</span>
+      <div class="sr-item"><span class="sr-word">worth it.</span></div>
+    </div>
+
+    <div class="steal-pillars">
+      <div class="pillar">
+        <div class="pillar-k">More potent</div>
+        <p>Restaurant-grade &mdash; real olive oil &amp; ghee, not a seed-oil packet. A little goes a long way.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-k">Zero waste</div>
+        <p>One cup, one meal, gone. No half-dead bottle rotting in your fridge door.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-k">$2.99 &middot; 2 for $5</div>
+        <p>The cheapest thing on the table &mdash; and the only part you&rsquo;ll remember.</p>
+      </div>
+    </div>
+
+    <a href="#lineup" class="steal-cta">Smart money dips &rarr;</a>
   </div>
 </section>
 
