@@ -16,10 +16,22 @@
   :root {
     --bg: #09090B;
     --fg: #F5F0E8;
+    --fg-soft: rgba(245,240,232,0.7);
     --muted: rgba(245,240,232,0.55);
     --accent: #c9a35b;
     --line: rgba(201,163,91,0.15);
+    --nav-bg: rgba(9,9,11,0.92);
+    --hero-bright: 0.64;
   }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #F4EFE4; --fg: #241f16; --fg-soft: rgba(36,31,22,0.8);
+      --muted: rgba(44,37,24,0.62); --accent: #9d7c33; --line: rgba(157,124,51,0.24);
+      --nav-bg: rgba(246,241,232,0.86); --hero-bright: 0.74;
+    }
+  }
+  :root[data-theme="dark"] { --bg:#09090B; --fg:#F5F0E8; --fg-soft:rgba(245,240,232,0.7); --muted:rgba(245,240,232,0.55); --accent:#c9a35b; --line:rgba(201,163,91,0.15); --nav-bg:rgba(9,9,11,0.92); --hero-bright:0.64; }
+  :root[data-theme="light"] { --bg:#F4EFE4; --fg:#241f16; --fg-soft:rgba(36,31,22,0.8); --muted:rgba(44,37,24,0.62); --accent:#9d7c33; --line:rgba(157,124,51,0.24); --nav-bg:rgba(246,241,232,0.86); --hero-bright:0.74; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -28,6 +40,7 @@
     color: var(--fg);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease;
   }
   a { color: inherit; text-decoration: none; }
 
@@ -85,11 +98,22 @@
     justify-content: space-between;
     padding: 0 32px;
     z-index: 100;
-    background: rgba(9,9,11,0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
+    transition: background 0.5s ease;
   }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); background: transparent;
+    padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .nav-brand {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
@@ -125,10 +149,25 @@
   .hero-bg {
     position: absolute;
     inset: -4%;
-    background: url('images/drip-cooler-hero.jpg') center/cover no-repeat;
-    filter: brightness(0.38) saturate(1.15) contrast(1.05);
-    animation: heroDrift 10s ease-in-out infinite alternate;
+    z-index: 0;
+    background: url('images/hero-dip.jpg') center/cover no-repeat;
+    filter: brightness(var(--hero-bright)) saturate(1.12) contrast(1.04);
+    animation: heroDrift 12s ease-in-out infinite alternate;
     transform-origin: center center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 44%, rgba(6,6,8,0.7) 0%, rgba(6,6,8,0.24) 40%, rgba(6,6,8,0) 66%),
+      linear-gradient(0deg, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0) 42%),
+      linear-gradient(180deg, rgba(6,6,8,0.5) 0%, rgba(6,6,8,0) 24%);
+  }
+  .hero-austin, .hero-ritual, .hero-tagline, .hero-no-seed {
+    text-shadow: 0 2px 16px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.6);
   }
   .hero-content {
     position: relative;
@@ -514,6 +553,137 @@
     top: 2px;
   }
 
+  /* SHOWCASE */
+  .showcase {
+    padding: 64px 24px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .showcase-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(201,163,91,0.5);
+    margin-bottom: 16px;
+  }
+  .showcase img {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.15);
+    margin-bottom: 16px;
+    animation: productFloat 5s ease-in-out infinite alternate;
+  }
+  @keyframes productFloat {
+    0%   { transform: translateY(0) scale(1.0); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.15); }
+    100% { transform: translateY(-8px) scale(1.02); box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,163,91,0.25), 0 0 40px rgba(201,163,91,0.08); }
+  }
+  .showcase-caption {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* CHEF PROFILE */
+  .chef-profile {
+    padding: 64px 24px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .chef-card {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(201,163,91,0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .chef-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 60px rgba(201,163,91,0.08), 0 0 0 1px rgba(201,163,91,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+    border-color: rgba(201,163,91,0.3);
+  }
+  .chef-initial {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(201,163,91,0.2) 0%, rgba(201,163,91,0.08) 100%);
+    border: 1px solid rgba(201,163,91,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    animation: chefBreath 6s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(201,163,91,0.1);
+  }
+  @keyframes chefBreath {
+    0%   { transform: scale(1.0); box-shadow: 0 0 20px rgba(201,163,91,0.1); }
+    100% { transform: scale(1.06); box-shadow: 0 0 40px rgba(201,163,91,0.2); }
+  }
+  .chef-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+  .chef-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(201,163,91,0.6);
+    margin-bottom: 16px;
+  }
+  .chef-rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 16px;
+  }
+  .chef-creds {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .chef-creds li {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    color: var(--fg-soft);
+  }
+  .chef-creds li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 10px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .chef-creds li strong { color: var(--fg); font-weight: 600; }
+  .chef-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(201,163,91,0.65);
+  }
+
   /* FOOTER */
   footer {
     padding: 40px 48px;
@@ -551,7 +721,7 @@
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    color: var(--muted);
   }
 
   /* RESPONSIVE */
@@ -569,13 +739,31 @@
     .nav-brand { font-size: 1.1rem; }
     .nav-link { font-size: 0.6rem; padding: 6px 12px; }
   }
+
+  /* PRODUCT LIDS (design-as-code — current Launch Four) */
+  .lid-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin: 0 auto 20px; max-width: 780px; }
+  .lid-item { display: flex; flex-direction: column; align-items: center; }
+  .lidwrap { width: 160px; height: 160px; position: relative; }
+  .lid { position: absolute; top: 0; left: 0; width: 360px; height: 360px; border-radius: 50%; overflow: hidden; transform: scale(0.444); transform-origin: top left; background: radial-gradient(circle at 50% 38%, #131210, #060605 78%); box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.08); }
+  .lid .ro { position: absolute; inset: 7px; border-radius: 50%; box-shadow: inset 0 0 0 5px var(--sku); }
+  .lid .ri { position: absolute; inset: 26px; border-radius: 50%; border: 0.5px solid rgba(201,163,91,0.16); }
+  .lid .lc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 44px 30px; }
+  .lid .ld { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 5px; color: var(--sku-l); line-height: 1; }
+  .lid .la { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 9px; text-transform: uppercase; color: rgba(201,163,91,0.42); margin: 4px 0 0 9px; }
+  .lid .lr { width: 42px; height: 1px; background: linear-gradient(90deg, transparent, var(--sku), transparent); margin: 10px 0; }
+  .lid .lf { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 20px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--sku-l); line-height: 1.1; }
+  .lid .lp { margin-top: 9px; font-size: 6.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #0A0A0A; background: linear-gradient(135deg, var(--sku-l), var(--sku)); padding: 3px 8px; border-radius: 2px; }
+  .lid-name { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; font-size: 0.95rem; color: var(--accent); margin-top: 12px; }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-brand">DRIP</div>
-  <a href="#lineup" class="nav-link">The Sauces</a>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme"><span id="themeIcon">☾</span><span id="themeLabel">Dark</span></button>
+    <a href="#lineup" class="nav-link">The Sauces</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -591,46 +779,22 @@
   </div>
 </div>
 
-<!-- BRIDGE — 1/3 text + 2/3 rotating gallery -->
-<div class="bridge">
-  <div class="bridge-rule"></div>
-
-  <div class="bridge-grid">
-    <div class="bridge-text">
-      <h3 class="bridge-kicker gold-shimmer">Pizza Sauce Elevated.</h3>
-      <div class="bridge-kicker-rule"></div>
-      <p class="bridge-quote">
-        <span class="beat">Single-serve.</span>
-        <span class="beat">Single meal.</span>
-        <span class="beat">Single decision.</span>
-        <span class="punchline">Under five bucks.</span>
-      </p>
-    </div>
-
-    <div class="bridge-gallery" id="bridgeGallery">
-      <img class="bridge-gallery-img active" src="images/lids/garlic-parmesan-lid.png" alt="Garlic Parmesan">
-      <img class="bridge-gallery-img" src="images/lids/jalapeno-crema-lid.png" alt="Jalapeño Crema">
-      <img class="bridge-gallery-img" src="images/lids/ranch-lid.png" alt="Ranch">
-      <img class="bridge-gallery-img" src="images/lids/texas-bbq-lid.png" alt="Texas BBQ">
-    </div>
+<!-- SMARTER INDULGENCE -->
+<section id="smarter" style="text-align:center;">
+  <div class="section-label" style="margin-bottom:12px;">The Smarter Indulgence</div>
+  <h2 class="gold-shimmer" style="margin:0 auto 18px;">Eat the whole pizza.<br>Wake up smug.</h2>
+  <p class="section-blurb" style="margin:0 auto 30px; max-width:660px;">
+    Still the treat &mdash; minus the wreckage. Frozen yogurt instead of the tub of ice cream. Hard seltzer
+    instead of the sugar-bomb cocktail. The full pleasure, none of the morning-after tax. Every mass-market dip
+    is built on soybean and canola oil; we build ours on <strong style="color:var(--fg);">olive oil and ghee</strong>,
+    so you can go back for the last slice with total peace of mind.
+  </p>
+  <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">ice cream</span> &rarr; <strong style="color:var(--accent);">frozen yogurt</strong></span>
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">sugar cocktail</span> &rarr; <strong style="color:var(--accent);">hard seltzer</strong></span>
+    <span style="padding:10px 16px; border:1px solid var(--line); border-radius:10px; font-size:0.82rem; color:var(--muted);"><span style="text-decoration:line-through; opacity:0.7;">seed-oil dip</span> &rarr; <strong style="color:var(--accent);">Drip</strong></span>
   </div>
-
-  <div class="bridge-rule"></div>
-</div>
-
-<script>
-(function () {
-  const gallery = document.getElementById('bridgeGallery');
-  if (!gallery) return;
-  const imgs = Array.from(gallery.querySelectorAll('.bridge-gallery-img'));
-  let i = 0;
-  setInterval(() => {
-    imgs[i].classList.remove('active');
-    i = (i + 1) % imgs.length;
-    imgs[i].classList.add('active');
-  }, 3800);
-})();
-</script>
+</section>
 
 <!-- LINEUP -->
 <section id="lineup">
@@ -642,14 +806,24 @@
   </p>
   <div class="flavor-grid">
     <div class="flavor-card">
-      <div class="flavor-num">No. 01 · The Category King</div>
+      <div class="flavor-num">No. 01 · The Crowd-Pleaser</div>
       <div class="flavor-name gold-shimmer">Garlic Parmesan</div>
-      <p class="flavor-desc">Real parmigiano, roasted garlic, fresh herbs. Creamy, cheesy, clean — the cheese-garlic occasion done right.</p>
+      <p class="flavor-desc">Roasted garlic and real parmesan, melted into every bite of crust.</p>
     </div>
     <div class="flavor-card">
-      <div class="flavor-num">No. 02 · The Velocity Anchor</div>
+      <div class="flavor-num">No. 02 · The Volume King</div>
       <div class="flavor-name gold-shimmer">Ranch</div>
-      <p class="flavor-desc">The only ranch made without seed oils. Real cultured buttermilk, dill, chives, lemon finish.</p>
+      <p class="flavor-desc">America's favorite dip, finally done clean — cultured buttermilk, fresh dill, zero shortcuts.</p>
+    </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 03 · The Austin Crossover</div>
+      <div class="flavor-name gold-shimmer">Jalapeño Crema</div>
+      <p class="flavor-desc">Roasted jalapeño, cilantro, and lime — born for pizza, dangerous on tacos and eggs.</p>
+    </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 04 · The Local Flag</div>
+      <div class="flavor-name gold-shimmer">Texas BBQ</div>
+      <p class="flavor-desc">Sweet, smoky, tomato-forward — Central Texas, in dip form.</p>
     </div>
     <div class="flavor-card">
       <div class="flavor-num">No. 03 · The Austin Crossover</div>
@@ -705,6 +879,59 @@
   </div>
 </section>
 
+<!-- PRODUCT SHOWCASE -->
+<div class="showcase">
+  <div class="showcase-label">The Product</div>
+  <div class="lid-row">
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#c9a35b;--sku-l:#e2c37c;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">GARLIC<br>PARMESAN</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Garlic Parmesan</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#cbc3a0;--sku-l:#ddd6b8;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">RANCH</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Ranch</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#a9b57e;--sku-l:#c1cc98;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">JALAPE&Ntilde;O<br>CREMA</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Jalape&ntilde;o Crema</div>
+    </div>
+    <div class="lid-item">
+      <div class="lidwrap"><div class="lid" style="--sku:#c08a4e;--sku-l:#d6a267;">
+        <div class="ro"></div><div class="ri"></div>
+        <div class="lc"><div class="ld">DRIP</div><div class="la">AUSTIN</div><div class="lr"></div><div class="lf">TEXAS<br>BBQ</div><div class="lp">NO SEED OILS</div></div>
+      </div></div>
+      <div class="lid-name">Texas BBQ</div>
+    </div>
+  </div>
+  <p class="showcase-caption">Four flavors. Olive oil and ghee. No seed oils.</p>
+</div>
+
+<!-- CHEF -->
+<div class="chef-profile">
+  <div class="showcase-label">The Chef Behind the Sauce</div>
+  <div class="chef-card">
+    <div class="chef-initial">CV</div>
+    <h3 class="chef-name gold-shimmer">Claudia Vital</h3>
+    <p class="chef-title">Chef Partner &nbsp;·&nbsp; Austin, Texas</p>
+    <div class="chef-rule"></div>
+    <ul class="chef-creds">
+      <li>Private caterer for <strong>Oscar-winning actors</strong>, <strong>Fortune 500 founders</strong>, and Austin's most discerning tables</li>
+      <li>Runs her own kitchen — specializes in fresh, from-scratch sauces with real ingredients</li>
+      <li>Mexican-American heritage — the flavors she grew up with are the ones nobody else is putting in a dip cup</li>
+    </ul>
+    <p class="chef-quote">"The people who've eaten her food don't forget it. Now everyone else gets to try."</p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">DRIP AUSTIN</div>
@@ -715,6 +942,19 @@
     <span>A Woolf Ventures Brand</span>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var root = document.documentElement,
+        btn = document.getElementById('themeToggle'),
+        ico = document.getElementById('themeIcon'),
+        lbl = document.getElementById('themeLabel');
+    function sysDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+    function apply(mode){ root.setAttribute('data-theme', mode); var d = mode === 'dark'; ico.textContent = d ? '☾' : '☀'; lbl.textContent = d ? 'Dark' : 'Light'; }
+    apply(sysDark() ? 'dark' : 'light');
+    btn.addEventListener('click', function(){ apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
+  })();
+</script>
 
 </body>
 </html>
