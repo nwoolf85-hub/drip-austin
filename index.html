@@ -136,61 +136,58 @@
     padding: 40px 24px;
     max-width: 700px;
   }
-  .hero-drip {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(6rem, 20vw, 12rem);
-    letter-spacing: 0.1em;
-    line-height: 0.85;
-    filter: drop-shadow(0 2px 12px rgba(201,163,91,0.35));
-    animation: fadeUp 1.8s ease-out forwards, goldShimmer 6s ease-in-out 1s infinite, dripSettle 10s ease-in-out infinite alternate;
-    opacity: 0;
-  }
-  .hero-austin {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(1.2rem, 4vw, 2rem);
-    letter-spacing: 0.4em;
-    color: rgba(201,163,91,0.5);
-    margin-top: 2px;
-    animation: fadeUp 1.6s ease-out 0.3s forwards;
-    opacity: 0;
-  }
-  .hero-ritual {
+  .hero-claim {
     font-family: 'Playfair Display', Georgia, serif;
     font-style: italic;
-    font-size: clamp(0.85rem, 2vw, 1rem);
-    color: rgba(201,163,91,0.5);
-    letter-spacing: 0.1em;
-    margin: 10px 0 6px;
-    animation: fadeUp 1.4s ease-out 0.5s forwards;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 7.6vw, 6rem);
+    line-height: 1.0;
+    letter-spacing: -0.015em;
+    filter: drop-shadow(0 2px 14px rgba(201,163,91,0.3));
+    animation: fadeUp 1.6s ease-out forwards, goldShimmer 8s ease-in-out 1.5s infinite;
     opacity: 0;
+    margin-bottom: 22px;
+    max-width: 14ch;
+    margin-left: auto;
+    margin-right: auto;
   }
   .hero-rule {
-    width: 120px;
+    width: 100px;
     height: 1px;
-    margin: 0 auto 16px;
+    margin: 0 auto 22px;
     background: linear-gradient(90deg, transparent 0%, rgba(201,163,91,0.7) 50%, transparent 100%);
-    animation: ruleDrawIn 1.2s ease-out 0.4s forwards;
+    animation: ruleDrawIn 1.2s ease-out 0.5s forwards;
     transform: scaleX(0);
   }
-  .hero-tagline {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: rgba(255,255,255,0.55);
+  .hero-proof {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.78rem, 1.6vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(201,163,91,0.85);
     animation: fadeUp 1.4s ease-out 0.7s forwards;
     opacity: 0;
-    margin-bottom: 6px;
+    margin-bottom: 18px;
   }
-  .hero-no-seed {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(201,163,91,0.6);
-    margin-bottom: 28px;
-    animation: fadeUp 1.2s ease-out 0.9s forwards;
+  .hero-promise {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+    color: rgba(245,240,232,0.78);
+    line-height: 1.4;
+    animation: fadeUp 1.4s ease-out 0.9s forwards;
     opacity: 0;
+    margin-bottom: 38px;
+  }
+  .hero-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    letter-spacing: 0.32em;
+    color: rgba(201,163,91,0.55);
+    animation: fadeUp 1.2s ease-out 1.1s forwards;
+    opacity: 0;
+    margin-bottom: 32px;
   }
   .hero-cta {
     display: inline-block;
@@ -203,13 +200,164 @@
     border-radius: 8px;
     padding: 14px 32px;
     transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-    animation: fadeUp 1.2s ease-out 1.1s forwards;
+    animation: fadeUp 1.2s ease-out 1.3s forwards;
     opacity: 0;
     box-shadow: 0 4px 16px rgba(201,163,91,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
   }
   .hero-cta:hover {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 16px 40px rgba(201,163,91,0.35), 0 0 60px rgba(201,163,91,0.12), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  /* ===== BRIGHT SUNLIT HERO (Michelin pizza + dip) — overrides the dark cooler hero ===== */
+  .hero-bg {
+    background-image: url('images/pizza-macro-hero.png') !important;
+    filter: saturate(1.05) contrast(1.02) brightness(1.01) !important;
+  }
+  .hero { justify-content: flex-start !important; text-align: left !important; }
+  /* soft cream scrim on the left so the dark type reads on the bright, busy photo
+     and the "clean white" feel carries all the way to the edge */
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(100deg,
+      rgba(255,253,249,0.95) 0%, rgba(255,253,249,0.80) 24%,
+      rgba(255,253,249,0.34) 46%, rgba(255,253,249,0.0) 66%);
+  }
+  .hero-content {
+    z-index: 2; max-width: 600px; text-align: left;
+    margin: 0; padding: 40px clamp(24px, 6vw, 92px);
+  }
+  .hero .hero-claim {
+    margin-left: 0; margin-right: 0; max-width: 15ch;
+    color: #5E3A18 !important; -webkit-text-fill-color: #5E3A18 !important;
+    background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important;
+    filter: drop-shadow(0 1px 2px rgba(255,255,255,0.55)) !important;
+    animation: fadeUp 1.6s ease-out forwards !important;
+  }
+  .hero .hero-rule { margin: 0 0 22px !important;
+    background: linear-gradient(90deg, rgba(122,78,34,0.75) 0%, rgba(122,78,34,0.12) 100%); }
+  .hero .hero-proof   { color: #8A5827; }
+  .hero .hero-promise { color: #4A4038; }
+  .hero .hero-mark    { color: rgba(122,78,34,0.62); }
+  @media (max-width: 640px) {
+    .hero::after { background: linear-gradient(180deg,
+      rgba(255,253,249,0.90) 0%, rgba(255,253,249,0.5) 34%, rgba(255,253,249,0.08) 62%, transparent 78%); }
+    .hero { justify-content: center !important; text-align: center !important; }
+    .hero-content { text-align: center; }
+    .hero .hero-claim { margin-left: auto; margin-right: auto; }
+    .hero .hero-rule { margin: 0 auto 22px !important; }
+  }
+
+  /* smooth the seam: melt the bright hero's bottom edge into the dark section below */
+  .hero::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30%; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(9,9,11,0) 0%, rgba(9,9,11,0.26) 48%, rgba(9,9,11,0.72) 80%, #09090B 100%);
+  }
+
+  /* FEATURE BAND — the sunlit hero look returns mid-scroll, emerging from and melting back into the dark */
+  .feature-band { position: relative; width: 100%; height: clamp(420px, 66vh, 640px); overflow: hidden; background: #09090B; }
+  .feature-band-img { position: absolute; inset: -3%; background: url('images/pizza-lifted-feature.png') center/cover no-repeat;
+    animation: heroDrift 12s ease-in-out infinite alternate; }
+  .feature-band::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, #09090B 0%, rgba(9,9,11,0) 20%, rgba(9,9,11,0) 58%, rgba(9,9,11,0.5) 84%, #09090B 100%); }
+  .feature-band-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(30px, 6vh, 66px); text-align: center; padding: 0 24px; }
+  .fb-kicker { font-family: 'Inter', sans-serif; font-size: clamp(0.72rem,1.5vw,0.86rem); font-weight: 600;
+    letter-spacing: 0.32em; text-transform: uppercase; color: rgba(201,163,91,0.92); margin-bottom: 12px; }
+  .fb-line { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(1.7rem,4.4vw,3rem); color: #F5F0E8; text-shadow: 0 2px 22px rgba(0,0,0,0.55); line-height: 1.1; }
+
+  /* BRIDGE — editorial beat between hero and lineup */
+  .bridge {
+    padding: 110px 24px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .bridge-rule {
+    width: 60px;
+    height: 1px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, rgba(201,163,91,0.55), transparent);
+  }
+  .bridge-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    max-width: 1180px;
+    margin: 64px auto;
+    align-items: center;
+    padding: 0 24px;
+  }
+  .bridge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .bridge-kicker {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin: 0;
+    filter: drop-shadow(0 1px 8px rgba(201,163,91,0.25));
+  }
+  .bridge-kicker-rule {
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,163,91,0.7), rgba(201,163,91,0.1));
+  }
+  .bridge-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.25rem, 1.85vw, 1.7rem);
+    line-height: 1.5;
+    text-align: left;
+    margin: 0;
+    color: rgba(245,240,232,0.7);
+  }
+  .bridge-quote .beat { display: block; }
+  .bridge-quote .punchline {
+    display: block;
+    margin-top: 0.7em;
+    color: var(--accent);
+    opacity: 0.92;
+  }
+  .bridge-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(201,163,91,0.35),
+      0 32px 80px rgba(0,0,0,0.55),
+      0 0 70px rgba(201,163,91,0.15);
+    animation: bridgeGalleryFloat 8s ease-in-out infinite alternate;
+    background:
+      radial-gradient(ellipse at center, rgba(201,163,91,0.18) 0%, rgba(40,32,18,0.55) 35%, #15110a 75%, #0a0a0a 100%);
+  }
+  .bridge-gallery-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+    filter: drop-shadow(0 12px 32px rgba(0,0,0,0.55)) drop-shadow(0 0 40px rgba(201,163,91,0.12));
+  }
+  .bridge-gallery-img.active { opacity: 1; }
+  @keyframes bridgeGalleryFloat {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+  }
+  @media (max-width: 860px) {
+    .bridge-grid { grid-template-columns: 1fr; gap: 44px; }
+    .bridge-text { gap: 40px; }
+    .bridge-quote { text-align: center; }
   }
 
   /* SECTIONS */
@@ -366,137 +514,6 @@
     top: 2px;
   }
 
-  /* SHOWCASE */
-  .showcase {
-    padding: 64px 24px;
-    text-align: center;
-    border-top: 1px solid var(--line);
-  }
-  .showcase-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(201,163,91,0.5);
-    margin-bottom: 16px;
-  }
-  .showcase img {
-    width: 100%;
-    max-width: 560px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.15);
-    margin-bottom: 16px;
-    animation: productFloat 5s ease-in-out infinite alternate;
-  }
-  @keyframes productFloat {
-    0%   { transform: translateY(0) scale(1.0); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,163,91,0.15); }
-    100% { transform: translateY(-8px) scale(1.02); box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,163,91,0.25), 0 0 40px rgba(201,163,91,0.08); }
-  }
-  .showcase-caption {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.4);
-  }
-
-  /* CHEF PROFILE */
-  .chef-profile {
-    padding: 64px 24px;
-    text-align: center;
-    border-top: 1px solid var(--line);
-  }
-  .chef-card {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 40px 32px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-    border: 1px solid rgba(201,163,91,0.15);
-    border-radius: 20px;
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
-    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .chef-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 60px rgba(201,163,91,0.08), 0 0 0 1px rgba(201,163,91,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
-    border-color: rgba(201,163,91,0.3);
-  }
-  .chef-initial {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(201,163,91,0.2) 0%, rgba(201,163,91,0.08) 100%);
-    border: 1px solid rgba(201,163,91,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    animation: chefBreath 6s ease-in-out infinite alternate;
-    box-shadow: 0 0 20px rgba(201,163,91,0.1);
-  }
-  @keyframes chefBreath {
-    0%   { transform: scale(1.0); box-shadow: 0 0 20px rgba(201,163,91,0.1); }
-    100% { transform: scale(1.06); box-shadow: 0 0 40px rgba(201,163,91,0.2); }
-  }
-  .chef-name {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 1.6rem;
-    margin-bottom: 4px;
-  }
-  .chef-title {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(201,163,91,0.6);
-    margin-bottom: 16px;
-  }
-  .chef-rule {
-    width: 40px;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 auto 16px;
-  }
-  .chef-creds {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  .chef-creds li {
-    font-size: 0.9rem;
-    font-weight: 300;
-    line-height: 1.5;
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-    color: rgba(255,255,255,0.7);
-  }
-  .chef-creds li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 9px;
-    width: 10px;
-    height: 2px;
-    background: var(--accent);
-  }
-  .chef-creds li strong { color: #fff; font-weight: 600; }
-  .chef-quote {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: rgba(201,163,91,0.65);
-  }
-
   /* FOOTER */
   footer {
     padding: 40px 48px;
@@ -543,11 +560,11 @@
     .flavor-grid { grid-template-columns: 1fr; }
     .compare-grid { grid-template-columns: 1fr; }
     nav { padding: 0 18px; }
-    .hero-drip { font-size: clamp(4.5rem, 22vw, 7rem); }
+    .hero-claim { font-size: clamp(2.2rem, 9vw, 3.8rem); max-width: 12ch; }
   }
   @media (max-width: 480px) {
-    .hero-drip { font-size: 4rem; }
-    .hero-austin { font-size: 1rem; letter-spacing: 0.3em; }
+    .hero-claim { font-size: 2.2rem; line-height: 1.05; max-width: 11ch; }
+    .hero-mark { font-size: 1.1rem; letter-spacing: 0.25em; }
     nav { height: 50px; }
     .nav-brand { font-size: 1.1rem; }
     .nav-link { font-size: 0.6rem; padding: 6px 12px; }
@@ -565,15 +582,55 @@
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <h1 class="hero-drip gold-shimmer" data-text="DRIP">DRIP</h1>
-    <div class="hero-austin">AUSTIN</div>
-    <p class="hero-ritual">drip &nbsp;· &nbsp;drizzle &nbsp;· &nbsp;dip</p>
+    <h1 class="hero-claim gold-shimmer">Pizza Dipping Sauce Elevated.</h1>
     <div class="hero-rule"></div>
-    <p class="hero-tagline">Made for Pizza. Ready for Everything.</p>
-    <p class="hero-no-seed">No Seed Oils · Pure Olive Oil &amp; Ghee</p>
+    <p class="hero-proof">Olive Oil &nbsp;·&nbsp; Real Ghee &nbsp;·&nbsp; No Seed Oils</p>
+    <p class="hero-promise">Because you owe it to yourself.</p>
+    <div class="hero-mark">DRIP &nbsp;·&nbsp; AUSTIN</div>
     <a href="#lineup" class="hero-cta">See The Sauces →</a>
   </div>
 </div>
+
+<!-- BRIDGE — 1/3 text + 2/3 rotating gallery -->
+<div class="bridge">
+  <div class="bridge-rule"></div>
+
+  <div class="bridge-grid">
+    <div class="bridge-text">
+      <h3 class="bridge-kicker gold-shimmer">Pizza Sauce Elevated.</h3>
+      <div class="bridge-kicker-rule"></div>
+      <p class="bridge-quote">
+        <span class="beat">Single-serve.</span>
+        <span class="beat">Single meal.</span>
+        <span class="beat">Single decision.</span>
+        <span class="punchline">Under five bucks.</span>
+      </p>
+    </div>
+
+    <div class="bridge-gallery" id="bridgeGallery">
+      <img class="bridge-gallery-img active" src="images/lids/garlic-parmesan-lid.png" alt="Garlic Parmesan">
+      <img class="bridge-gallery-img" src="images/lids/jalapeno-crema-lid.png" alt="Jalapeño Crema">
+      <img class="bridge-gallery-img" src="images/lids/ranch-lid.png" alt="Ranch">
+      <img class="bridge-gallery-img" src="images/lids/texas-bbq-lid.png" alt="Texas BBQ">
+    </div>
+  </div>
+
+  <div class="bridge-rule"></div>
+</div>
+
+<script>
+(function () {
+  const gallery = document.getElementById('bridgeGallery');
+  if (!gallery) return;
+  const imgs = Array.from(gallery.querySelectorAll('.bridge-gallery-img'));
+  let i = 0;
+  setInterval(() => {
+    imgs[i].classList.remove('active');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('active');
+  }, 3800);
+})();
+</script>
 
 <!-- LINEUP -->
 <section id="lineup">
@@ -581,29 +638,38 @@
   <h2 class="gold-shimmer">Find Your Drip.</h2>
   <p class="section-blurb">
     Every sauce is built on olive oil and ghee — never seed oils, never shortcuts.
-    Starting with four flavors. More coming from our chef's kitchen.
+    Starting with four flavors. More to come.
   </p>
   <div class="flavor-grid">
     <div class="flavor-card">
-      <div class="flavor-num">No. 01 · The Flagship</div>
-      <div class="flavor-name gold-shimmer">Garlic Butter</div>
-      <p class="flavor-desc">Rich garlic meets real ghee and olive oil. The dipping sauce pizza has been waiting for.</p>
-    </div>
-    <div class="flavor-card">
-      <div class="flavor-num">No. 02 · Sweet Heat</div>
-      <div class="flavor-name gold-shimmer">Hot Honey Garlic</div>
-      <p class="flavor-desc">Raw honey, cayenne, garlic. Sweet, spicy, and impossible to put down.</p>
-    </div>
-    <div class="flavor-card">
-      <div class="flavor-num">No. 03 · The Comfort</div>
+      <div class="flavor-num">No. 01 · The Category King</div>
       <div class="flavor-name gold-shimmer">Garlic Parmesan</div>
-      <p class="flavor-desc">Real parmigiano, roasted garlic, fresh herbs. Creamy, cheesy, clean.</p>
+      <p class="flavor-desc">Real parmigiano, roasted garlic, fresh herbs. Creamy, cheesy, clean — the cheese-garlic occasion done right.</p>
     </div>
     <div class="flavor-card">
-      <div class="flavor-num">No. 04 · The Crowd Pleaser</div>
+      <div class="flavor-num">No. 02 · The Velocity Anchor</div>
       <div class="flavor-name gold-shimmer">Ranch</div>
-      <p class="flavor-desc">The only ranch made without seed oils. Real buttermilk, dill, chives, lemon finish.</p>
+      <p class="flavor-desc">The only ranch made without seed oils. Real cultured buttermilk, dill, chives, lemon finish.</p>
     </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 03 · The Austin Crossover</div>
+      <div class="flavor-name gold-shimmer">Jalapeño Crema</div>
+      <p class="flavor-desc">Fresh jalapeño, lime, cilantro, real cultured buttermilk. Bright, cool, Austin-coded. Works on pizza, tacos, eggs.</p>
+    </div>
+    <div class="flavor-card">
+      <div class="flavor-num">No. 04 · The Texas Move</div>
+      <div class="flavor-name gold-shimmer">Texas BBQ</div>
+      <p class="flavor-desc">Central Texas style. Tomato-forward, sweet-smoky, oak-kissed. A flag in the ground.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE BAND — sunlit hero look returns mid-scroll -->
+<section class="feature-band">
+  <div class="feature-band-img"></div>
+  <div class="feature-band-cap">
+    <div class="fb-kicker">Made for Pizza &middot; Ready for Everything</div>
+    <div class="fb-line">Go on. You&rsquo;ve earned the drip.</div>
   </div>
 </section>
 
@@ -616,54 +682,28 @@
     We thought pizza deserved better. So we built better.
   </p>
   <div class="compare-grid">
-    <div class="compare-card them">
-      <div class="compare-label">Them</div>
-      <ul class="compare-list">
-        <li>Soybean &amp; canola oil base</li>
-        <li>"Natural flavors" (chemicals)</li>
-        <li>High fructose corn syrup</li>
-        <li>Artificial preservatives</li>
-        <li>Artificial colors &amp; ingredients</li>
-        <li>Made in a factory</li>
-      </ul>
-    </div>
     <div class="compare-card us">
       <div class="compare-label">Drip</div>
       <ul class="compare-list">
         <li>Olive oil &amp; ghee base</li>
-        <li>Real ingredients, named on label</li>
-        <li>Zero seed oils</li>
+        <li>Low in omega-6</li>
+        <li>Real ingredients, named on the label</li>
         <li>No high fructose corn syrup</li>
-        <li>No artificial ingredients or preservatives</li>
-        <li>Chef-crafted in Austin</li>
+        <li>Made in Austin, Texas</li>
+      </ul>
+    </div>
+    <div class="compare-card them">
+      <div class="compare-label">Them</div>
+      <ul class="compare-list">
+        <li>Soybean &amp; canola oil base</li>
+        <li>High in inflammatory omega-6</li>
+        <li>"Natural flavors" (chemicals)</li>
+        <li>High fructose corn syrup</li>
+        <li>Made in a factory</li>
       </ul>
     </div>
   </div>
 </section>
-
-<!-- PRODUCT SHOWCASE -->
-<div class="showcase">
-  <div class="showcase-label">The Product</div>
-  <img src="images/drip-quartet.jpg" alt="Drip Austin — four flavors">
-  <p class="showcase-caption">Four flavors. Pure olive oil and ghee. No seed oils.</p>
-</div>
-
-<!-- CHEF -->
-<div class="chef-profile">
-  <div class="showcase-label">The Chef Behind the Sauce</div>
-  <div class="chef-card">
-    <div class="chef-initial">CV</div>
-    <h3 class="chef-name gold-shimmer">Claudia Vital</h3>
-    <p class="chef-title">Chef &amp; Co-Creator &nbsp;·&nbsp; Austin, Texas</p>
-    <div class="chef-rule"></div>
-    <ul class="chef-creds">
-      <li>Private caterer for <strong>Oscar-winning actors</strong>, <strong>Fortune 500 founders</strong>, and Austin's most discerning tables — including <strong>Matthew McConaughey</strong> and <strong>John Mackey</strong>, the man who built Whole Foods</li>
-      <li>Runs her own kitchen — specializes in fresh, from-scratch sauces with real ingredients</li>
-      <li>Mexican-American heritage — the flavors she grew up with are the ones nobody else is putting in a dip cup</li>
-    </ul>
-    <p class="chef-quote">"The people who've eaten her food don't forget it. Now everyone else gets to try."</p>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer>
